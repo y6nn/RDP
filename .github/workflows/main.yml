@@ -16,7 +16,7 @@ jobs:
         Expand-Archive ngrok.zip
         copy .\ngrok\ngrok.exe C:\Windows\System32
     - name: Connect your NGROK account
-      run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
+      run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Download Important Files.
