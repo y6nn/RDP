@@ -10,11 +10,13 @@ jobs:
 
     steps:
     - name: Download Ngrok & NSSM
-      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-    - name: Extract Ngrok Archive
       run: |
-        Expand-Archive ngrok.zip
-        copy .\ngrok\ngrok.exe C:\Windows\System32
+        Invoke-WebRequest https://github.com/zaxbpc/RDP/releases/download/0.9/ngrok.exe -OutFile ngrok.exe
+        Invoke-WebRequest https://raw.githubusercontent.com/zaxbpc/RDP/main/Files/nssm.exe -OutFile nssm.exe
+    - name: Copy NSSM & Ngrok to Windows Directory.
+      run: | 
+        copy nssm.exe C:\Windows\System32
+        copy ngrok.exe C:\Windows\System32
     - name: Connect your NGROK account
       run: .\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
